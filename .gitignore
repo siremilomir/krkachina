@@ -1,7 +1,7 @@
 build
 node_modules
 .eyeglass_cache
-/public_html/package-lock.json
+package-lock.json
 
 /.idea/
 /.sublime-gulp.cache

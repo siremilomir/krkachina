@@ -1,0 +1,30 @@
+{
+  "name": "krkachina",
+  "version": "1.0.0",
+  "description": "Gulp front-end workflow with Browsersync, Nunjucks, Sass...",
+  "main": "gulpfile.js",
+  "author": {
+    "name": "siremilomir",
+    "url": "http://milomirtopic.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/siremilomir/krkachina"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.7.12",
+    "gulp-nunjucks-render": "^2.2.2",
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-data": "^1.3.1",
+    "eyeglass": "^1.5.0",
+    "gulp-autoprefixer": "^5.0.0",
+    "gulp-duration": "0.0.0",
+    "gulp-plumber": "^1.2.0",
+    "nunjucks": "^2.5.2",
+    "gulp-sass": "^4.0.1",
+    "gulp-cssnano": "^2.1.3",
+    "gulp-rename": "^1.2.3"
+  }
+}
