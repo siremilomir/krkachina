@@ -1,0 +1,16 @@
+build
+node_modules
+.eyeglass_cache
+/public_html/package-lock.json
+
+/.idea/
+/.sublime-gulp.cache
+/sublime-gulp.log
+/*.sublime-project
+/*.sublime-workspace
+/.jshintrc
+
+.DS_Store
+.AppleDouble
+.AppleDesktop
+.AppleDB
