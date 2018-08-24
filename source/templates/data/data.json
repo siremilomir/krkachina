@@ -4,21 +4,21 @@
       "avatar": "http://i.pravatar.cc/150",
       "name": "John Doe",
       "title": "Developer",
-      "company": "Krakachina LLC",
+      "company": "Mrvacha LLC",
       "phone": "(123) 123-4567",
       "skype": "JohnDoe",
-      "email": "john@krakachina.com",
-      "website": "www.krakachina.com"
+      "email": "john@mrvacha.com",
+      "website": "www.mrvacha.com"
     },
     {
       "avatar": "http://i.pravatar.cc/150",
       "name": "Jane Doe",
       "title": "Designer",
-      "company": "Krakachina LLC",
+      "company": "Mrvacha LLC",
       "phone": "(123) 123-4567",
       "skype": "JaneDoe",
-      "email": "jane@krakachina.com",
-      "website": "www.krakachina.com"
+      "email": "jane@mrvacha.com",
+      "website": "www.mrvacha.com"
     }
   ]
 }
