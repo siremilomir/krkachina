@@ -1,0 +1,24 @@
+{
+  "contacts": [
+    {
+      "avatar": "http://i.pravatar.cc/150",
+      "name": "John Doe",
+      "title": "Developer",
+      "company": "Krakachina LLC",
+      "phone": "(123) 123-4567",
+      "skype": "JohnDoe",
+      "email": "john@krakachina.com",
+      "website": "www.krakachina.com"
+    },
+    {
+      "avatar": "http://i.pravatar.cc/150",
+      "name": "Jane Doe",
+      "title": "Designer",
+      "company": "Krakachina LLC",
+      "phone": "(123) 123-4567",
+      "skype": "JaneDoe",
+      "email": "jane@krakachina.com",
+      "website": "www.krakachina.com"
+    },
+  ]
+}
