@@ -12,25 +12,39 @@ var plumber = require('gulp-plumber');
 var sass = require('gulp-sass');
 // var cssnano = require('gulp-cssnano');
 // var rename = require('gulp-rename');
+var uglify = require('gulp-uglify');
 
 
 var config = {
     source_dir : 'source/',
-    build_dir : 'build',
+    build_dir : 'build/',
     templates_dir : 'templates/',
+    styles_dir : 'styles/',
     data_dir : 'data/',
-    css_dest : 'build/styles/',
-    scss_files : 'scss/**/*.scss'
+    scripts_dir : 'scripts/'
 };
 
+
+// Scripts
+gulp.task('scripts',function(){
+    gulp.src([config.source_dir + config.scripts_dir + '[^_]*.js'])
+        .pipe(plumber())
+        // .pipe(uglify()) todo
+        .pipe(gulp.dest(config.build_dir + config.scripts_dir))
+        // .pipe(browserSync.reload({
+        //     stream: true
+        // }))
+});
+
 gulp.task('styles', function() {
-    gulp.src(config.source_dir + config.scss_files)
+    gulp.src([config.source_dir + config.styles_dir + '[^_]*.{scss,css}'])
+    // gulp.src(config.source_dir + config.scss_files)
         .pipe(plumber())
         .pipe(sass(eyeglass()))
         .pipe(autoprefixer())
         // .pipe(sass({outputStyle: 'compressed'}))
         // .pipe(rename({ suffix: '.min'}))
-        .pipe(gulp.dest(config.css_dest))
+        .pipe(gulp.dest(config.build_dir + config.styles_dir))
         .pipe(duration('Compiling scss'))
 });
 
@@ -45,15 +59,17 @@ gulp.task('nunjucks', function() {
             envOptions: {autoescape: false}
         }))
         .pipe(gulp.dest(config.build_dir))
-        .pipe(browserSync.reload({
-            stream: true
-        }))
+        // .pipe(browserSync.reload({
+        //     stream: true
+        // }))
 });
 
 gulp.task('browserSync', function() {
-    browserSync.init([config.css_dest + '*.css'], {
+    browserSync.init([
+        config.build_dir + config.styles_dir + '*.css',
+        config.build_dir + '*.html',
+        config.build_dir + config.scripts_dir + '**/*.js' ], {
         port: 8080,
-        open: false,
         server: {
             baseDir: config.build_dir
         }
@@ -62,7 +78,8 @@ gulp.task('browserSync', function() {
 
 // Watchers files for changes
 gulp.task('watch', function() {
-    gulp.watch(config.source_dir + config.scss_files, ['styles']);
+    gulp.watch(config.source_dir + config.styles_dir + '**/*.scss', ['styles']);
+    gulp.watch(config.source_dir + config.scripts_dir + '**/*.js', ['scripts']);
     gulp.watch([
         config.source_dir + config.templates_dir + '**/*.+(html|nunjucks)',
         config.source_dir + config.templates_dir + '**/*',
@@ -77,4 +94,4 @@ gulp.task('clean', function () {
     ]);
 });
 
-gulp.task('default', ['watch', 'styles', 'nunjucks', 'browserSync']);
+gulp.task('default', ['watch', 'styles', 'scripts', 'nunjucks', 'browserSync']);

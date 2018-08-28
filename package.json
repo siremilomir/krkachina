@@ -10,21 +10,22 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/siremilomir/krkachina"
+    "url": "https://github.com/siremilomir/mrvacha"
   },
   "devDependencies": {
-    "browser-sync": "^2.7.12",
-    "gulp-nunjucks-render": "^2.2.2",
+    "browser-sync": "^2.24.7",
     "del": "^3.0.0",
-    "gulp": "^3.9.1",
-    "gulp-data": "^1.3.1",
     "eyeglass": "^1.5.0",
+    "gulp": "^3.9.1",
     "gulp-autoprefixer": "^5.0.0",
-    "gulp-duration": "0.0.0",
-    "gulp-plumber": "^1.2.0",
-    "nunjucks": "^2.5.2",
-    "gulp-sass": "^4.0.1",
     "gulp-cssnano": "^2.1.3",
-    "gulp-rename": "^1.2.3"
+    "gulp-data": "^1.3.1",
+    "gulp-duration": "0.0.0",
+    "gulp-nunjucks-render": "^2.2.2",
+    "gulp-plumber": "^1.2.0",
+    "gulp-rename": "^1.2.3",
+    "gulp-sass": "^4.0.1",
+    "nunjucks": "^2.5.2",
+    "gulp-uglify": "^3.0.1"
   }
 }

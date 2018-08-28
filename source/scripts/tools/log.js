@@ -1,0 +1,1 @@
+console.log('gulp include tools/logs.js logging...');

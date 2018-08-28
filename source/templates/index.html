@@ -11,11 +11,23 @@
     {% block body %}
         <main>
             <h1>
-                Welcome to Krkachina
+                Welcome to Mrvacha
             </h1>
             <p>Gulp front-end workflow Gulp with Browsersync, Nunjucks, Sass</p>
+            <br>
+
+            <h3>Data example</h3>
+            <hr>
+
+            {% for contact in contacts %}
+            <div class="module">
+                <h3>{{ contact.name }}</h3>
+                <p>{{ contact.email }}</p>
+            </div>
+            {% endfor %}
         </main>
     {% endblock %}
 
 {% block scripts %}
+<script type="text/javascript" src="scripts/script.js"></script>
 {% endblock %}
