@@ -11,7 +11,7 @@ var autoprefixer = require('gulp-autoprefixer');
 var plumber = require('gulp-plumber');
 var sass = require('gulp-sass');
 // var rename = require('gulp-rename');
-var uglify = require('gulp-uglify');
+// var uglify = require('gulp-uglify');
 var cleancss = require('gulp-clean-css');
 var sourcemaps = require('gulp-sourcemaps');
 var environments = require('gulp-environments');
@@ -93,8 +93,14 @@ gulp.task('watch', function() {
 // Clean build directory
 gulp.task('clean', function () {
     return del.sync([
-        config.build_dir + '**/*',
+        config.build_dir + '**/*'
     ]);
 });
 
-gulp.task('default', ['watch', 'styles', 'scripts', 'templates', 'browserSync']);
+// development task (gulp devel)
+gulp.task('devel', ['watch', 'styles', 'scripts', 'templates', 'browserSync']);
+
+// production task (gulp build --env production)
+gulp.task('build', ['clean', 'styles', 'scripts', 'templates']);
+
+
