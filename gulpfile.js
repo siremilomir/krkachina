@@ -10,12 +10,17 @@ var eyeglass = require("eyeglass");
 var autoprefixer = require('gulp-autoprefixer');
 var plumber = require('gulp-plumber');
 var sass = require('gulp-sass');
-// var cssnano = require('gulp-cssnano');
 // var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var cleancss = require('gulp-clean-css');
+var sourcemaps = require('gulp-sourcemaps');
+var environments = require('gulp-environments');
 
+// Environments
+var development = environments.development;
+var production = environments.production;
 
+// Paths
 var config = {
     source_dir : 'source/',
     build_dir : 'build/',
@@ -24,7 +29,6 @@ var config = {
     data_dir : 'data/',
     scripts_dir : 'scripts/'
 };
-
 
 // Scripts
 gulp.task('scripts',function(){
@@ -36,18 +40,21 @@ gulp.task('scripts',function(){
 
 gulp.task('styles', function() {
     gulp.src([config.source_dir + config.styles_dir + '[^_]*.{scss,css}'])
+        .pipe(development(sourcemaps.init()))
     // gulp.src(config.source_dir + config.scss_files)
         .pipe(plumber())
         .pipe(sass(eyeglass()))
         .pipe(autoprefixer())
-        // .pipe(sass({outputStyle: 'compressed'}))
         // .pipe(rename({ suffix: '.min'}))
-        .pipe(cleancss())
+        // only write out sourcemaps in development
+        .pipe(development(sourcemaps.write('.')))
+        // only minify CSS in production mode only
+        .pipe(production(cleancss()))
         .pipe(gulp.dest(config.build_dir + config.styles_dir))
         .pipe(duration('Compiling scss'))
 });
 
-// Templating and JSON data
+// Templates and JSON data
 gulp.task('templates', function() {
     return gulp.src([config.source_dir + config.templates_dir + '*.+(html|nunjucks)'])
         .pipe(data(function() {
@@ -58,9 +65,6 @@ gulp.task('templates', function() {
             envOptions: {autoescape: false}
         }))
         .pipe(gulp.dest(config.build_dir))
-        // .pipe(browserSync.reload({
-        //     stream: true
-        // }))
 });
 
 gulp.task('browserSync', function() {
