@@ -13,6 +13,7 @@ var sass = require('gulp-sass');
 // var cssnano = require('gulp-cssnano');
 // var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
+var cleancss = require('gulp-clean-css');
 
 
 var config = {
@@ -31,9 +32,6 @@ gulp.task('scripts',function(){
         .pipe(plumber())
         // .pipe(uglify()) todo
         .pipe(gulp.dest(config.build_dir + config.scripts_dir))
-        // .pipe(browserSync.reload({
-        //     stream: true
-        // }))
 });
 
 gulp.task('styles', function() {
@@ -44,12 +42,13 @@ gulp.task('styles', function() {
         .pipe(autoprefixer())
         // .pipe(sass({outputStyle: 'compressed'}))
         // .pipe(rename({ suffix: '.min'}))
+        .pipe(cleancss())
         .pipe(gulp.dest(config.build_dir + config.styles_dir))
         .pipe(duration('Compiling scss'))
 });
 
 // Templating and JSON data
-gulp.task('nunjucks', function() {
+gulp.task('templates', function() {
     return gulp.src([config.source_dir + config.templates_dir + '*.+(html|nunjucks)'])
         .pipe(data(function() {
             return JSON.parse(fs.readFileSync('source/templates/data/data.json'))
@@ -84,7 +83,7 @@ gulp.task('watch', function() {
         config.source_dir + config.templates_dir + '**/*.+(html|nunjucks)',
         config.source_dir + config.templates_dir + '**/*',
         config.source_dir + config.data_dir + 'data.json'
-    ], ['nunjucks']);
+    ], ['templates']);
 });
 
 // Clean build directory
@@ -94,4 +93,4 @@ gulp.task('clean', function () {
     ]);
 });
 
-gulp.task('default', ['watch', 'styles', 'scripts', 'nunjucks', 'browserSync']);
+gulp.task('default', ['watch', 'styles', 'scripts', 'templates', 'browserSync']);
