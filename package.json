@@ -26,8 +26,9 @@
     "gulp-rename": "^1.2.3",
     "gulp-sass": "^4.0.1",
     "gulp-uglify": "^3.0.1",
+    "gulp-mode": "^1.0.2",
     "nunjucks": "^2.5.2",
-    "gulp-environments": "^0.1.2",
-    "gulp-sourcemaps": "^2.6.4"
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-htmlmin": "^4.0.0"
   }
 }

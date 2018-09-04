@@ -11,14 +11,12 @@ var autoprefixer = require('gulp-autoprefixer');
 var plumber = require('gulp-plumber');
 var sass = require('gulp-sass');
 // var rename = require('gulp-rename');
-// var uglify = require('gulp-uglify');
+var uglify = require('gulp-uglify');
 var cleancss = require('gulp-clean-css');
+var htmlmin = require('gulp-htmlmin');
 var sourcemaps = require('gulp-sourcemaps');
-var environments = require('gulp-environments');
-
-// Environments
-var development = environments.development;
-var production = environments.production;
+// var environments = require('gulp-environments');
+var mode = require('gulp-mode')();
 
 // Paths
 var config = {
@@ -33,23 +31,24 @@ var config = {
 // Scripts
 gulp.task('scripts',function(){
     gulp.src([config.source_dir + config.scripts_dir + '[^_]*.js'])
+        .pipe(mode.development(sourcemaps.init()))
         .pipe(plumber())
-        // .pipe(uglify()) todo
+        .pipe(mode.development(sourcemaps.write('.')))
+        .pipe(mode.production(uglify()))
         .pipe(gulp.dest(config.build_dir + config.scripts_dir))
 });
 
 gulp.task('styles', function() {
     gulp.src([config.source_dir + config.styles_dir + '[^_]*.{scss,css}'])
-        .pipe(development(sourcemaps.init()))
-    // gulp.src(config.source_dir + config.scss_files)
+        .pipe(mode.development(sourcemaps.init()))
         .pipe(plumber())
         .pipe(sass(eyeglass()))
         .pipe(autoprefixer())
         // .pipe(rename({ suffix: '.min'}))
         // only write out sourcemaps in development
-        .pipe(development(sourcemaps.write('.')))
+        .pipe(mode.development(sourcemaps.write('.')))
         // only minify CSS in production mode only
-        .pipe(production(cleancss()))
+        .pipe(mode.production(cleancss()))
         .pipe(gulp.dest(config.build_dir + config.styles_dir))
         .pipe(duration('Compiling scss'))
 });
@@ -64,6 +63,7 @@ gulp.task('templates', function() {
             path: [config.source_dir + config.templates_dir],
             envOptions: {autoescape: false}
         }))
+        .pipe(mode.production(htmlmin({collapseWhitespace: true, removeComments: true})))
         .pipe(gulp.dest(config.build_dir))
 });
 
@@ -97,10 +97,10 @@ gulp.task('clean', function () {
     ]);
 });
 
-// development task (gulp devel)
+// Development task ($ gulp devel)
 gulp.task('devel', ['watch', 'styles', 'scripts', 'templates', 'browserSync']);
 
-// production task (gulp build --env production)
+// Production task ($ gulp build --production)
 gulp.task('build', ['clean', 'styles', 'scripts', 'templates']);
 
 
