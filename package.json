@@ -33,6 +33,7 @@
     "nunjucks": "^2.5.2"
   },
   "dependencies": {
+    "gridlex": "^2.7.1",
     "normalize-scss": "^7.0.1"
   }
 }
