@@ -10,12 +10,13 @@ var eyeglass = require("eyeglass");
 var autoprefixer = require('gulp-autoprefixer');
 var plumber = require('gulp-plumber');
 var sass = require('gulp-sass');
-// var rename = require('gulp-rename');
+var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var cleancss = require('gulp-clean-css');
 var htmlmin = require('gulp-htmlmin');
 var sourcemaps = require('gulp-sourcemaps');
 var mode = require('gulp-mode')();
+var htmlreplace = require('gulp-html-replace');
 
 // Paths
 var config = {
@@ -33,7 +34,9 @@ gulp.task('scripts',function(){
         .pipe(mode.development(sourcemaps.init()))
         .pipe(plumber())
         .pipe(mode.development(sourcemaps.write('.')))
+        // uglify and rename JS in production mode only
         .pipe(mode.production(uglify()))
+        .pipe(mode.production(rename({ suffix: '.min' })))
         .pipe(gulp.dest(config.build_dir + config.scripts_dir))
 });
 
@@ -43,11 +46,10 @@ gulp.task('styles', function() {
         .pipe(plumber())
         .pipe(sass(eyeglass()))
         .pipe(autoprefixer())
-        // .pipe(rename({ suffix: '.min'}))
-        // only write out sourcemaps in development
         .pipe(mode.development(sourcemaps.write('.')))
-        // only minify CSS in production mode only
+        // minify and rename CSS in production mode only
         .pipe(mode.production(cleancss()))
+        .pipe(mode.production(rename({ suffix: '.min' })))
         .pipe(gulp.dest(config.build_dir + config.styles_dir))
         .pipe(duration('Compiling scss'))
 });
@@ -62,6 +64,11 @@ gulp.task('templates', function() {
             path: [config.source_dir + config.templates_dir],
             envOptions: {autoescape: false}
         }))
+        // replace css and js names with .min in production mode
+        .pipe(mode.production(htmlreplace({
+            'css': 'styles/style.min.css',
+            'js': 'scripts/script.min.js',
+        })))
         .pipe(mode.production(htmlmin({collapseWhitespace: true, removeComments: true})))
         .pipe(gulp.dest(config.build_dir))
 });

@@ -1,14 +1,16 @@
 {% extends "layouts/basic.html" %}
 
-    {% block meta %}
+        {% block meta %}
         <meta name="description" content="This is home.">
-    {% endblock %}
+        {% endblock %}
 
-    {% block styles %}
+        {% block styles %}
+        <!-- build:css -->
         <link rel="stylesheet" href="styles/style.css">
-    {% endblock %}
+        <!-- endbuild -->
+        {% endblock %}
 
-    {% block body %}
+        {% block body %}
         <main>
             <h1>
                 Welcome to Mrvacha
@@ -26,8 +28,10 @@
             </div>
             {% endfor %}
         </main>
-    {% endblock %}
+        {% endblock %}
 
-{% block scripts %}
-<script type="text/javascript" src="scripts/script.js"></script>
-{% endblock %}
+        {% block scripts %}
+        <!-- build:js -->
+        <script type="text/javascript" src="scripts/script.js"></script>
+        <!-- endbuild -->
+        {% endblock %}
