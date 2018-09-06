@@ -15,7 +15,6 @@ var uglify = require('gulp-uglify');
 var cleancss = require('gulp-clean-css');
 var htmlmin = require('gulp-htmlmin');
 var sourcemaps = require('gulp-sourcemaps');
-// var environments = require('gulp-environments');
 var mode = require('gulp-mode')();
 
 // Paths
