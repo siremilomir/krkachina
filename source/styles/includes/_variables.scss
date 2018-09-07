@@ -1,0 +1,19 @@
+// colors
+$text-default: #212529;
+
+// Gridlex variables
+$gl-colCount: 12;
+$gl-gridName: grid;
+$gl-colName: col;
+$gl-attributeName: class;
+$gl-gutter: 3rem;
+$gl-gutter-vertical: 0rem;
+$gl-mq-width: 'max-width';
+$gl-mq-list: (
+        lg: 80em,
+        md: 64em,
+        sm: 48em,
+        xs: 36em
+)
+
+
